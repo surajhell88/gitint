@@ -16,7 +16,9 @@ var waterfall = require('async/waterfall'),
 	GitHubApi = require("github"),
 	github = new GitHubApi(),
 	NodeGit = require("nodegit"),
-	cloneOptions = {};
+	cloneOptions = {}
+    path = require("path"),
+    fs = require('fs');
 
 process.chdir('/home/suraj/Development');
 
@@ -50,9 +52,16 @@ waterfall([
         	callback(null, res);
         });
     },
+    function (res, callback) {
+        var exec = require('child_process').exec;
+        exec('rm -rf ' + path.join(process.cwd(), res.name), function (err, stdout, stderr) {
+            if (err) throw err;
+            callback(null, res);
+        });
+    },
     function(res, callback) {
     	console.log('Cloning forked lesson...');
-    	var localPath = require("path").join(process.cwd(), res.name);
+    	var localPath = path.join(process.cwd(), res.name);
     	cloneOptions.fetchOpts = {
 			callbacks: {
 				certificateCheck: function() { return 1; },
