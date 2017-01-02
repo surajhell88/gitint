@@ -4,10 +4,14 @@ Node CLI App
 
 ## Installation
 
+Make sure you have `nodejs` already installed in your local machine.
+
+If you already have configured `nodejs`, then execute following commands,
 `npm install && npm link`
 
 ## Usage
 
+Use the following command to know all the options,
 `gitint -h`
 
 ## Contributing
